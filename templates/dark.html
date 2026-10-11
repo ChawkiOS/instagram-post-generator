@@ -1,0 +1,113 @@
+<!doctype html>
+<!--
+  DARK style: near-black stage with two soft color glows, big tight titles, tilted colored cards with
+  deep soft shadows, a phone mockup with a sticker, a quiet footer with a pill. Premium, "night out".
+  Best for: a feature launch, an app screen, a dilemma / poll, results, a teaser.
+
+  How to use: copy this file, paste the palette from scripts/palette.py over the :root block,
+  set <body class="post|square|story">, replace every SLOT, delete the blocks you don't need.
+  One <section class="slide"> per image; a carousel has several, rendered with render.sh <file> <format> <out> <n>.
+-->
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Work+Sans:wght@500;600;700&display=swap">
+<style>
+:root{
+  /* SLOT palette: replace with the output of palette.py */
+  --accent:#FF725E; --partner:#74E7BC; --ink:#141010; --ink-raise:#1F1A19; --paper:#F6E6DB;
+  --on-accent:#141010; --on-partner:#141010;
+}
+*{box-sizing:border-box;margin:0}
+html,body{width:1080px;overflow:hidden}
+body.post,body.post .slide{height:1350px} body.square,body.square .slide{height:1080px} body.story,body.story .slide{height:1920px}
+body{background:var(--ink);color:var(--paper);font-family:'Work Sans',sans-serif;position:relative}
+.slide{position:relative;padding:80px;display:none;flex-direction:column;overflow:hidden}
+.slide:only-of-type,.slide.on{display:flex}
+/* Story: keep the top 220 px and bottom 300 px free of important content (Instagram UI). */
+body.story .slide{padding-top:230px;padding-bottom:300px}
+body.story .eyebrow{margin-top:110px} body.story h1{font-size:108px} body.story .duel{margin-top:130px} body.story .opt{padding:70px 50px} body.story .split{margin-top:90px}
+.slide > *{position:relative;z-index:2}
+.glow{position:absolute !important;z-index:0 !important;border-radius:50%;filter:blur(150px);pointer-events:none}
+
+/* Header: logo + wordmark, pager or pill on the right */
+.top{display:flex;align-items:center;gap:16px}
+.logo{width:58px;height:58px;border-radius:15px;background:var(--accent);color:var(--on-accent);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-weight:700;font-size:32px;overflow:hidden}
+.logo img{width:100%;height:100%;object-fit:cover}
+.wm{font-family:'Space Grotesk';font-weight:700;font-size:36px}.wm b{color:var(--accent)}
+.pager{margin-left:auto;font-family:'Space Grotesk';font-weight:700;font-size:24px;color:color-mix(in srgb,var(--paper) 50%,transparent)}
+.pill{margin-left:auto;border:2px solid color-mix(in srgb,var(--accent) 70%,transparent);color:var(--accent);border-radius:999px;padding:12px 26px;font-weight:700;font-size:24px;letter-spacing:.08em;text-transform:uppercase}
+
+/* Title block */
+.eyebrow{margin-top:70px;font-family:'Space Grotesk';font-weight:700;font-size:28px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+h1{font-family:'Space Grotesk';font-weight:700;font-size:96px;line-height:.98;letter-spacing:-.03em;margin-top:16px}
+h1 em{font-style:normal;color:var(--accent)}
+.lede{margin-top:22px;font-size:34px;line-height:1.3;color:color-mix(in srgb,var(--paper) 75%,transparent);font-weight:500;max-width:860px}
+
+/* Hero visual, option A: two tilted choice cards with a pill between them (dilemma, before / after) */
+.duel{margin-top:60px;display:flex;flex-direction:column;align-items:stretch}
+.opt{border-radius:40px;padding:56px 50px;font-family:'Space Grotesk';font-weight:700;font-size:58px;line-height:1.08;box-shadow:0 30px 70px rgba(0,0,0,.5);display:flex;align-items:center;gap:30px}
+.opt .k{flex-shrink:0;width:86px;height:86px;border-radius:50%;background:rgba(0,0,0,.14);display:flex;align-items:center;justify-content:center;font-size:44px}
+.opt.a{background:var(--accent);color:var(--on-accent);transform:rotate(-2deg)}
+.opt.b{background:var(--partner);color:var(--on-partner);transform:rotate(1.5deg)}
+.vs{align-self:center;margin:-26px 0;z-index:3;background:var(--paper);color:var(--ink);font-family:'Space Grotesk';font-weight:700;font-size:40px;padding:16px 38px;border-radius:999px;box-shadow:0 14px 30px rgba(0,0,0,.4)}
+
+/* Hero visual, option B: copy on the left, tilted phone with the real screenshot on the right */
+.split{margin-top:60px;display:flex;gap:40px;align-items:center;flex:1}
+.split .copy{flex:1;display:flex;flex-direction:column;gap:22px}
+.phone{position:relative;flex-shrink:0;width:440px;height:900px;border-radius:62px;background:#0a0a0c;padding:14px;border:3px solid rgba(255,255,255,.12);transform:rotate(-6deg);box-shadow:0 40px 90px rgba(0,0,0,.6)}
+.phone img{width:100%;height:100%;object-fit:cover;object-position:top;border-radius:48px;display:block}
+.phone .sticker{position:absolute;left:-60px;top:70px;background:var(--partner);color:var(--on-partner);font-family:'Space Grotesk';font-weight:700;font-size:34px;padding:14px 26px;border-radius:20px;transform:rotate(-8deg);box-shadow:0 14px 30px rgba(0,0,0,.4)}
+
+/* Feature list: emoji + bold words (3 lines max) */
+.feats{display:flex;flex-direction:column;gap:18px}
+.feat{font-size:32px;font-weight:700;line-height:1.25}
+
+/* Numbered steps on raised cards */
+.steps{margin-top:34px;display:flex;flex-direction:column;gap:14px}
+.st{display:flex;align-items:center;gap:28px;background:var(--ink-raise);border:2px solid color-mix(in srgb,var(--paper) 8%,transparent);border-radius:26px;padding:22px 30px}
+.st .n{font-family:'Space Grotesk';font-weight:700;font-size:44px;color:var(--accent);width:40px}
+.st .t{font-size:30px;font-weight:600;line-height:1.25}
+
+/* Footer: call to action / store line + pill or arrow */
+.foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:30px;font-size:30px;font-weight:600;color:color-mix(in srgb,var(--paper) 65%,transparent)}
+.foot b{color:var(--paper)} .foot em{font-style:normal;color:var(--accent);font-weight:700}
+.swipe{font-family:'Space Grotesk';font-weight:700;font-size:34px;color:color-mix(in srgb,var(--paper) 75%,transparent)}
+</style></head>
+<body class="post">
+
+<section class="slide" id="s1">
+  <div class="glow" style="width:800px;height:800px;background:var(--accent);opacity:.22;left:-300px;top:300px"></div>
+  <div class="glow" style="width:700px;height:700px;background:var(--partner);opacity:.16;right:-300px;bottom:100px"></div>
+  <div class="top">
+    <div class="logo">Q<!-- or <img src="logo.png"> --></div>
+    <span class="wm">SLOT_APP_NAM<b>E</b></span>
+    <span class="pager">1/2</span><!-- or <span class="pill">Bientôt</span> -->
+  </div>
+  <div class="eyebrow">SLOT eyebrow…</div>
+  <h1>SLOT big title,<br><em>with the hook.</em></h1>
+
+  <!-- Hero visual: keep ONE of option A / B -->
+  <div class="duel">
+    <div class="opt a"><span class="k">📵</span>SLOT option one</div>
+    <div class="vs">OU</div>
+    <div class="opt b"><span class="k">🔇</span>SLOT option two</div>
+  </div>
+  <!--
+  <div class="split">
+    <div class="copy">
+      <p class="lede">SLOT one sentence that explains the feature.</p>
+      <div class="feats"><div class="feat">👑 SLOT</div><div class="feat">⭐ SLOT</div><div class="feat">🤥 SLOT</div></div>
+    </div>
+    <div class="phone"><img src="SLOT screenshot.png" alt=""><span class="sticker">📸 SLOT</span></div>
+  </div>
+  -->
+
+  <div class="foot"><span><b>SLOT call to action 👇</b><br><em>SLOT the punchline.</em></span><span class="swipe">→</span></div>
+</section>
+
+<script>
+  // Carousel: show the slide named in the URL hash (#2 -> section 2), the first one otherwise.
+  const slides = document.querySelectorAll('.slide');
+  const n = Math.max(1, Math.min(slides.length, Number(location.hash.slice(1)) || 1));
+  slides[n - 1].classList.add('on');
+</script>
+</body></html>

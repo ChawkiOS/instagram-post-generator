@@ -1,0 +1,119 @@
+<!doctype html>
+<!--
+  PAPER style: graph paper, red margin line, heavy black titles, a marker highlight, hand-written notes,
+  big tiles or cards with hard offset shadows, a dark band at the bottom for the call to action.
+  Playful, "school notebook". Best for: a game rule, a mechanic, a how-to, a funny scenario.
+
+  How to use: copy this file, paste the palette from scripts/palette.py over the :root block,
+  set <body class="post|square|story">, replace every SLOT, delete the blocks you don't need.
+  One <section class="slide"> per image; a carousel has several, rendered with render.sh <file> <format> <out> <n>.
+-->
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Caveat:wght@600;700&family=Work+Sans:wght@500;600;700&display=swap">
+<style>
+:root{
+  /* SLOT palette: replace with the output of palette.py */
+  --accent:#FF725E; --partner:#74E7BC; --ink:#141010; --ink-raise:#1F1A19; --paper:#F6E6DB;
+  --on-accent:#141010; --on-partner:#141010;
+}
+*{box-sizing:border-box;margin:0}
+html,body{width:1080px;overflow:hidden}
+body.post,body.post .slide{height:1350px} body.square,body.square .slide{height:1080px} body.story,body.story .slide{height:1920px}
+body{background:var(--paper);color:var(--ink);font-family:'Work Sans',sans-serif;position:relative;
+  background-image:linear-gradient(color-mix(in srgb,var(--ink) 6%,transparent) 2px,transparent 2px),
+                   linear-gradient(90deg,color-mix(in srgb,var(--ink) 6%,transparent) 2px,transparent 2px);
+  background-size:54px 54px;background-position:-2px -2px}
+.margin{position:absolute;left:96px;top:0;bottom:0;width:3px;background:color-mix(in srgb,var(--accent) 45%,transparent)}
+.slide{position:relative;padding:76px 80px 0 130px;display:none;flex-direction:column}
+.slide:only-of-type,.slide.on{display:flex}
+/* Story: keep the top 220 px and bottom 300 px free of important content (Instagram UI). */
+body.story .slide{padding-top:230px}
+body.story .title{margin-top:90px} body.story .board{margin-top:240px} body.story .cards,body.story .phone{margin-top:120px} body.story .notes{margin-top:110px;gap:24px}
+
+/* Header: logo + wordmark, pill or pager on the right */
+.top{display:flex;align-items:center;gap:14px}
+.logo{width:54px;height:54px;border-radius:14px;background:var(--accent);color:var(--on-accent);display:flex;align-items:center;justify-content:center;font-family:'Archivo Black';font-size:30px;overflow:hidden}
+.logo img{width:100%;height:100%;object-fit:cover}
+.wm{font-family:'Archivo Black';font-size:32px;letter-spacing:.5px}.wm b{color:var(--accent);font-weight:400}
+.pill{margin-left:auto;background:var(--ink);color:var(--paper);font-weight:700;font-size:22px;letter-spacing:.12em;text-transform:uppercase;padding:12px 22px;border-radius:999px;transform:rotate(3deg)}
+.pager{margin-left:auto;font-weight:700;font-size:24px;color:color-mix(in srgb,var(--ink) 45%,transparent)}
+
+/* Title block */
+.kicker{margin-top:56px;font-family:'Caveat';font-weight:700;font-size:52px;color:var(--accent);transform:rotate(-2deg);transform-origin:left}
+.title{margin-top:54px;display:flex;align-items:center;gap:22px}
+.kicker + .title{margin-top:6px}
+.title .emoji{font-size:120px;line-height:1;transform:rotate(-8deg)}
+.title h1{font-family:'Archivo Black';font-weight:400;font-size:150px;line-height:.9;letter-spacing:-2px}
+.title h1.mid{font-size:96px;line-height:.95;letter-spacing:-1px}
+.sub{font-family:'Archivo Black';font-size:52px;line-height:1.05;margin-top:18px}
+.sub span{background:var(--accent);color:var(--on-accent);padding:0 10px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+
+/* Hero visual, option A: letter / word tiles (rebuild the app's key element big) */
+.board{position:relative;margin-top:150px;display:flex;gap:16px;flex-wrap:wrap}
+.tile{width:118px;height:132px;background:var(--ink);color:var(--paper);border-radius:18px;display:flex;align-items:center;justify-content:center;font-family:'Archivo Black';font-size:76px;box-shadow:0 10px 0 color-mix(in srgb,var(--ink) 25%,transparent)}
+.tile:nth-child(2){transform:rotate(-3deg)}.tile:nth-child(3){transform:rotate(2deg)}.tile:nth-child(4){transform:rotate(-2deg)}
+.tile.hot{background:var(--accent);color:var(--on-accent);transform:rotate(4deg)}
+.tile.ghost{background:transparent;color:color-mix(in srgb,var(--ink) 35%,transparent);border:5px dashed color-mix(in srgb,var(--ink) 35%,transparent);box-shadow:none}
+/* Speech bubble, hand-written, hard shadow */
+.bubble{position:absolute;right:-20px;top:-118px;background:#fff;border:4px solid var(--ink);border-radius:28px;padding:16px 26px;font-family:'Caveat';font-weight:700;font-size:48px;transform:rotate(5deg);box-shadow:8px 8px 0 var(--ink)}
+.bubble:after{content:'';position:absolute;left:60px;bottom:-26px;width:34px;height:34px;background:#fff;border-right:4px solid var(--ink);border-bottom:4px solid var(--ink);transform:rotate(45deg)}
+
+/* Hero visual, option B: sticky-note cards (choices, quotes, questions) */
+.cards{margin-top:70px;display:flex;flex-direction:column;gap:22px}
+.card{background:#fff;border:4px solid var(--ink);border-radius:26px;padding:30px 36px;font-family:'Archivo Black';font-size:46px;line-height:1.1;box-shadow:8px 8px 0 var(--ink)}
+.card:nth-child(odd){transform:rotate(-1.5deg)}.card:nth-child(even){transform:rotate(1.2deg)}
+.card.accent{background:var(--accent);color:var(--on-accent)}.card.partner{background:var(--partner);color:var(--on-partner)}
+.card small{display:block;font-family:'Caveat';font-size:38px;margin-bottom:4px;opacity:.75}
+
+/* Hero visual, option C: phone with a real app screenshot (taped on the page) */
+.phone{position:relative;margin:60px auto 0;width:460px;height:940px;border-radius:64px;background:var(--ink);padding:16px;transform:rotate(-4deg);box-shadow:14px 14px 0 color-mix(in srgb,var(--ink) 22%,transparent)}
+.phone img{width:100%;height:100%;object-fit:cover;object-position:top;border-radius:50px;display:block}
+.tape{position:absolute;width:170px;height:46px;background:color-mix(in srgb,var(--partner) 70%,transparent);top:-18px;left:50%;transform:translateX(-50%) rotate(-6deg)}
+.sticker{position:absolute;right:-70px;top:120px;background:var(--accent);color:var(--on-accent);font-family:'Caveat';font-weight:700;font-size:46px;padding:10px 26px;border-radius:999px;transform:rotate(8deg);box-shadow:6px 6px 0 var(--ink)}
+
+/* Hand-written notes with accent arrows (3 lines max) */
+.notes{margin-top:76px;display:flex;flex-direction:column;gap:16px;font-family:'Caveat';font-weight:700;font-size:54px;line-height:1.05}
+.notes div:before{content:'→ ';color:var(--accent)}
+
+/* Bottom band: call to action */
+.band{margin:auto -80px 0 -130px;background:var(--ink);color:var(--paper);padding:40px 80px 44px 130px;display:flex;justify-content:space-between;align-items:center;gap:30px}
+body.story .band{margin-bottom:300px;margin-right:0;border-radius:0 28px 28px 0}
+.band b{font-family:'Archivo Black';font-weight:400;font-size:40px}
+.band b em{font-style:normal;color:var(--accent)}
+.band span{font-size:26px;font-weight:600;color:color-mix(in srgb,var(--paper) 70%,transparent);text-align:right;line-height:1.35}
+/* Carousel: "next" hint bottom right */
+.next{margin-top:auto;margin-bottom:56px;align-self:flex-end;font-family:'Caveat';font-weight:700;font-size:44px}
+</style></head>
+<body class="post">
+<div class="margin"></div>
+
+<section class="slide" id="s1">
+  <div class="top">
+    <div class="logo">Q<!-- or <img src="logo.png"> --></div>
+    <span class="wm">SLOT_APP_NAM<b>E</b></span>
+    <span class="pill">SLOT Nouveau</span><!-- or <span class="pager">1/4</span> -->
+  </div>
+  <div class="title"><span class="emoji">👻</span><h1>SLOT</h1><!-- emoji: SLOT, one --><!-- long title: <h1 class="mid"> --></div>
+  <div class="sub"><span>SLOT highlighted promise.</span><br>SLOT the twist… in one line.</div>
+
+  <!-- Hero visual: keep ONE of option A / B / C -->
+  <div class="board">
+    <div class="tile">C</div><div class="tile">H</div><div class="tile">A</div><div class="tile hot">Q</div><div class="tile ghost">?</div>
+    <div class="bubble">« SLOT a line someone says »</div>
+  </div>
+
+  <div class="notes">
+    <div>SLOT short fact 1</div>
+    <div>SLOT short fact 2</div>
+    <div>SLOT short fact 3</div>
+  </div>
+  <div class="band"><b>SLOT Gratuit dans <em>APP</em></b><span>SLOT detail<br>SLOT iOS & Android</span></div>
+</section>
+
+<script>
+  // Carousel: show the slide named in the URL hash (#2 -> section 2), the first one otherwise.
+  const slides = document.querySelectorAll('.slide');
+  const n = Math.max(1, Math.min(slides.length, Number(location.hash.slice(1)) || 1));
+  slides[n - 1].classList.add('on');
+</script>
+</body></html>
